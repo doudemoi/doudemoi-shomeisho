@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>どうでもいい証明書発行所</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <main class="container">
+
+    <h1>どうでもいい証明書発行所</h1>
+
+    <p class="description">
+      あなたの人生で一枚だけ発行される、<br>
+      どうでもいい証明書。
+    </p>
+
+    <section id="inputArea">
+      <input
+        type="text"
+        id="nameInput"
+        placeholder="名前を入力"
+        maxlength="20"
+      >
+
+      <button id="issueButton">
+        証明書を発行する
+      </button>
+    </section>
+
+    <p id="status"></p>
+
+    <section id="certificateArea" class="hidden">
+
+      <div id="certificate">
+
+        <div class="certificate-number" id="certificateNumber"></div>
+
+        <h2>証 明 書</h2>
+
+        <div class="name" id="certificateName"></div>
+
+        <p class="certificate-text">
+          あなたは
+        </p>
+
+        <p class="achievement" id="certificateText"></p>
+
+        <p class="certificate-text">
+          ことをここに正式に証明します。
+        </p>
+
+        <div class="date" id="certificateDate"></div>
+
+        <div class="issuer">
+          どうでもいい証明書発行所
+          <div class="seal">之印</div>
+        </div>
+
+        <p class="warning">
+          本証明書は一切の法的効力を有しません。
+        </p>
+
+      </div>
+
+      <button id="downloadButton">
+        証明書を画像として保存
+      </button>
+
+    </section>
+
+  </main>
+
+  <script src="script.js"></script>
+
+</body>
+</html>
