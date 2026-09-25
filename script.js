@@ -1,36 +1,37 @@
+const STORAGE_KEY = "doudemoi_certificate";
+const COUNTER_KEY = "doudemoi_certificate_counter";
+
 const certificates = [
-  "スマートフォンを開いたものの、何をするか忘れた",
-  "冷蔵庫を開けたが、何も取らずに閉めた",
-  "「あと5分」を3回以上繰り返した",
-  "何かを取りに部屋へ行ったのに、何を取りに来たか忘れた",
-  "授業中に時計を5回以上確認した",
-  "返信を考えているうちに時間が経過した",
-  "LINEを開いたものの、返信せずに閉じた",
-  "寝る前にスマートフォンを触り続けた",
-  "目的もなくスマートフォンを開いた",
-  "一度聞いた話を初めて聞いたような顔で聞いた",
-  "「まあいいか」で問題を解決した",
-  "何もしていないのに疲れた",
-  "家を出た後に忘れ物を思い出した",
-  "時計を見た直後に、もう一度時計を見た",
-  "検索するためにスマートフォンを開いて、別のことを始めた",
-  "特に理由もなくSNSを開いた",
-  "「明日やる」と言った",
-  "何かを探している途中で別のものを見つけた",
-  "自分の名前を書き間違えた",
-  "「これ何に使うんだっけ」と思った"
+  "スマートフォンを開いたものの、何をするか忘れた。",
+  "冷蔵庫を開けたが、何も取らずに閉めた。",
+  "「あと5分」を3回以上繰り返した。",
+  "何かを取りに部屋へ行ったのに、何を取りに来たか忘れた。",
+  "授業中に時計を5回以上確認した。",
+  "返信を考えているうちに時間が経過した。",
+  "LINEを開いたものの、返信せずに閉じた。",
+  "寝る前にスマートフォンを触り続けた。",
+  "目的もなくスマートフォンを開いた。",
+  "一度聞いた話を初めて聞いたような顔で聞いた。",
+  "「まあいいか」で問題を解決した。",
+  "何もしていないのに疲れた。",
+  "家を出た後に忘れ物を思い出した。",
+  "時計を見た直後に、もう一度時計を見た。",
+  "検索するためにスマートフォンを開いて、別のことを始めた。",
+  "特に理由もなくSNSを開いた。",
+  "「明日やる」と言った。",
+  "何かを探している途中で別のものを見つけた。",
+  "自分の名前を書き間違えた。",
+  "「これ何に使うんだっけ」と思った。"
 ];
 
 
-// =========================
-// DOM
-// =========================
+const inputArea = document.getElementById("inputArea");
+const certificateArea = document.getElementById("certificateArea");
 
 const nameInput = document.getElementById("nameInput");
 const issueButton = document.getElementById("issueButton");
 
-const inputArea = document.getElementById("inputArea");
-const certificateArea = document.getElementById("certificateArea");
+const status = document.getElementById("status");
 
 const certificateName =
   document.getElementById("certificateName");
@@ -56,64 +57,46 @@ const lineButton =
 const xButton =
   document.getElementById("xButton");
 
-const status =
-  document.getElementById("status");
 
-
-// =========================
-// 保存場所
-// =========================
-
-const STORAGE_KEY = "doudemoi_certificate";
-
-const COUNTER_KEY = "doudemoi_certificate_counter";
-
-
-// =========================
-// 今日の日付
-// =========================
+/* =========================
+   今日の日付
+========================= */
 
 function getToday() {
 
-  const today = new Date();
+  const now = new Date();
 
-  const year = today.getFullYear();
-  const month = today.getMonth() + 1;
-  const day = today.getDate();
+  const year = now.getFullYear();
+  const month = String(now.getMonth() + 1).padStart(2, "0");
+  const day = String(now.getDate()).padStart(2, "0");
 
-  return `${year} 年 ${month} 月 ${day} 日`;
+  return `${year}.${month}.${day}`;
 }
 
 
-// =========================
-// 証明書番号
-// =========================
+/* =========================
+   証明書番号
+========================= */
 
 function getNextCertificateNumber() {
 
   let counter =
-    Number(localStorage.getItem(COUNTER_KEY));
+    Number(localStorage.getItem(COUNTER_KEY) || "0");
 
-  // 初回
-  if (!counter || counter < 1) {
-    counter = 1;
-  } else {
-    counter++;
-  }
+  counter++;
 
   localStorage.setItem(
     COUNTER_KEY,
-    counter
+    String(counter)
   );
 
-  // 7桁にする
   return String(counter).padStart(7, "0");
 }
 
 
-// =========================
-// 証明書を表示
-// =========================
+/* =========================
+   証明書表示
+========================= */
 
 function showCertificate(data) {
 
@@ -121,7 +104,7 @@ function showCertificate(data) {
     data.name;
 
   certificateText.textContent =
-    data.text;
+    "ここに、あなたが成し遂げたどうでもいい事実を証明します。";
 
   certificateTextLarge.textContent =
     data.text;
@@ -144,47 +127,16 @@ function showCertificate(data) {
 }
 
 
-// =========================
-// ページを開いたとき
-// =========================
-
-// すでに発行済みなら、
-// 同じ証明書を表示する
-const savedCertificate =
-  localStorage.getItem(STORAGE_KEY);
-
-if (savedCertificate) {
-
-  try {
-
-    const data =
-      JSON.parse(savedCertificate);
-
-    showCertificate(data);
-
-  } catch (error) {
-
-    console.error(
-      "保存された証明書の読み込みに失敗しました。",
-      error
-    );
-
-    localStorage.removeItem(STORAGE_KEY);
-  }
-}
-
-
-// =========================
-// 証明書発行
-// =========================
+/* =========================
+   発行
+========================= */
 
 issueButton.addEventListener("click", () => {
 
-  // 念のため二重発行を防止
-  const alreadyIssued =
+  const existing =
     localStorage.getItem(STORAGE_KEY);
 
-  if (alreadyIssued) {
+  if (existing) {
 
     status.textContent =
       "このブラウザでは、すでに証明書を発行済みです。";
@@ -202,175 +154,227 @@ issueButton.addEventListener("click", () => {
     status.textContent =
       "名前を入力してください。";
 
+    nameInput.focus();
+
     return;
   }
 
 
-  status.textContent = "";
-
-
-  // ランダムな証明内容
   const randomIndex =
-    Math.floor(
-      Math.random() * certificates.length
-    );
-
-  const text =
-    certificates[randomIndex];
+    Math.floor(Math.random() * certificates.length);
 
 
-  // 証明書番号
-  const number =
-    getNextCertificateNumber();
-
-
-  // 発行日
-  const date =
-    getToday();
-
-
-  // 証明書データ
-  const certificateData = {
+  const data = {
 
     name: name,
 
-    text: text,
+    text: certificates[randomIndex],
 
-    number: number,
+    date: getToday(),
 
-    date: date
+    number: getNextCertificateNumber()
 
   };
 
 
-  // Chromeのこのサイトに保存
   localStorage.setItem(
     STORAGE_KEY,
-    JSON.stringify(certificateData)
+    JSON.stringify(data)
   );
 
 
-  // 表示
-  showCertificate(
-    certificateData
-  );
+  showCertificate(data);
 
 });
 
 
-// =========================
-// 画像保存
-// =========================
+/* =========================
+   Enterキー
+========================= */
 
-downloadButton.addEventListener(
-  "click",
-  async () => {
+nameInput.addEventListener("keydown", (event) => {
 
-    const certificate =
-      document.getElementById("certificate");
+  if (event.key === "Enter") {
 
-    downloadButton.textContent =
-      "画像を作成中...";
+    issueButton.click();
+
+  }
+
+});
+
+
+/* =========================
+   保存
+========================= */
+
+downloadButton.addEventListener("click", async () => {
+
+  const certificate =
+    document.getElementById("certificate");
+
+
+  if (typeof html2canvas === "undefined") {
+
+    alert("画像保存機能の読み込みに失敗しました。");
+
+    return;
+  }
+
+
+  downloadButton.disabled = true;
+
+  downloadButton.textContent =
+    "画像を作成中…";
+
+
+  try {
+
+    const canvas =
+      await html2canvas(certificate, {
+
+        scale: 3,
+
+        backgroundColor: "#f7f1e3",
+
+        useCORS: true,
+
+        logging: false
+
+      });
+
+
+    const link =
+      document.createElement("a");
+
+
+    const data =
+      JSON.parse(
+        localStorage.getItem(STORAGE_KEY)
+      );
+
+
+    link.download =
+      `どうでもいい証明書_${data.name}.png`;
+
+
+    link.href =
+      canvas.toDataURL("image/png");
+
+
+    link.click();
+
+
+  } catch (error) {
+
+    console.error(error);
+
+    alert(
+      "画像の保存に失敗しました。"
+    );
+
+  }
+
+
+  downloadButton.disabled = false;
+
+  downloadButton.textContent =
+    "証明書を画像として保存";
+
+});
+
+
+/* =========================
+   LINE
+========================= */
+
+lineButton.addEventListener("click", () => {
+
+  const data =
+    JSON.parse(
+      localStorage.getItem(STORAGE_KEY)
+    );
+
+
+  if (!data) return;
+
+
+  const message =
+    `${data.name}さんの「どうでもいい証明書」が発行されました。\n\n` +
+    `証明内容：${data.text}\n` +
+    `証明書番号：${data.number}\n\n` +
+    `どうでもいい証明書発行所\n` +
+    `${location.href}`;
+
+
+  const url =
+    "https://line.me/R/msg/text/?" +
+    encodeURIComponent(message);
+
+
+  window.open(url, "_blank");
+
+});
+
+
+/* =========================
+   X
+========================= */
+
+xButton.addEventListener("click", () => {
+
+  const data =
+    JSON.parse(
+      localStorage.getItem(STORAGE_KEY)
+    );
+
+
+  if (!data) return;
+
+
+  const text =
+    `${data.name}さんの「どうでもいい証明書」が発行されました。\n\n` +
+    `「${data.text}」\n\n` +
+    `#どうでもいい証明書`;
+
+
+  const url =
+    "https://twitter.com/intent/tweet?" +
+    "text=" +
+    encodeURIComponent(text) +
+    "&url=" +
+    encodeURIComponent(location.href);
+
+
+  window.open(url, "_blank");
+
+});
+
+
+/* =========================
+   起動時
+========================= */
+
+window.addEventListener("DOMContentLoaded", () => {
+
+  const saved =
+    localStorage.getItem(STORAGE_KEY);
+
+
+  if (saved) {
 
     try {
 
-      const canvas =
-        await html2canvas(
-          certificate,
-          {
-            scale: 2,
-            backgroundColor: "#f8f5ec",
-            useCORS: true
-          }
-        );
+      const data =
+        JSON.parse(saved);
 
-
-      const link =
-        document.createElement("a");
-
-      link.download =
-        "どうでもいい証明書.png";
-
-      link.href =
-        canvas.toDataURL(
-          "image/png"
-        );
-
-      link.click();
-
+      showCertificate(data);
 
     } catch (error) {
 
-      console.error(error);
-
-      alert(
-        "画像の作成に失敗しました。"
-      );
+      localStorage.removeItem(STORAGE_KEY);
 
     }
 
-
-    downloadButton.textContent =
-      "証明書を画像として保存";
-
   }
-);
 
-
-// =========================
-// LINE
-// =========================
-
-lineButton.addEventListener(
-  "click",
-  () => {
-
-    const text =
-      "どうでもいい証明書を発行しました。\n" +
-      "あなたも一枚発行してみてください！\n" +
-      window.location.href;
-
-
-    const url =
-      "https://line.me/R/msg/text/?" +
-      encodeURIComponent(text);
-
-
-    window.open(
-      url,
-      "_blank"
-    );
-
-  }
-);
-
-
-// =========================
-// X
-// =========================
-
-xButton.addEventListener(
-  "click",
-  () => {
-
-    const text =
-      "どうでもいい証明書を発行しました。\n" +
-      "#どうでもいい証明書発行所";
-
-
-    const url =
-      "https://twitter.com/intent/tweet?text=" +
-      encodeURIComponent(text) +
-      "&url=" +
-      encodeURIComponent(
-        window.location.href
-      );
-
-
-    window.open(
-      url,
-      "_blank"
-    );
-
-  }
-);
+});
