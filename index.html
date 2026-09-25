@@ -5,168 +5,373 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>どうでもいい証明書発行所</title>
-  <meta name="description" content="あなたの人生で一枚だけ発行される、どうでもいい証明書。">
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-  <link
-    href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;500;600;700;900&family=Playfair+Display:wght@400;500;600&display=swap"
-    rel="stylesheet"
+  <meta
+    name="description"
+    content="あなたの人生で一枚だけ発行される、どうでもいい証明書。"
   >
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-  <main class="page">
+  <main class="container">
 
-    <!-- 発行前 -->
-    <section id="inputArea" class="input-area">
+    <!-- サイトタイトル -->
+    <header class="site-header">
+      <h1>どうでもいい証明書発行所</h1>
 
-      <div class="site-mark">
-        CERTIFICATE OFFICE
-      </div>
-
-      <h1>どうでもいい<br>証明書発行所</h1>
-
-      <p class="lead">
+      <p class="description">
         あなたの人生で一枚だけ発行される、<br>
         どうでもいい証明書。
       </p>
+    </header>
 
-      <div class="input-box">
 
-        <label for="nameInput">あなたの名前</label>
+    <!-- 名前入力 -->
+    <section id="inputArea">
 
-        <input
-          id="nameInput"
-          type="text"
-          maxlength="20"
-          placeholder="名前を入力してください"
-          autocomplete="off"
-        >
+      <input
+        type="text"
+        id="nameInput"
+        placeholder="名前を入力"
+        maxlength="20"
+        autocomplete="off"
+      >
 
-        <button id="issueButton" class="main-button">
-          証明書を発行する
-        </button>
-
-        <p id="status" class="status"></p>
-
-      </div>
+      <button id="issueButton">
+        証明書を発行する
+      </button>
 
     </section>
 
 
-    <!-- 証明書 -->
-    <section id="certificateArea" style="display:none;">
-
-      <div id="certificate" class="certificate">
-
-        <div class="certificate-border">
-
-          <div class="certificate-inner">
-
-            <!-- 上部 -->
-            <header class="certificate-header">
-
-              <div class="header-left">
-                CERTIFICATE
-              </div>
-
-              <div class="emblem">
-                <span>之</span>
-              </div>
-
-              <div class="header-right">
-                OFFICE OF<br>
-                NOTHING
-              </div>
-
-            </header>
+    <p id="status"></p>
 
 
-            <!-- 番号 -->
-            <div class="certificate-number">
-              No. <span id="certificateNumber">0000000</span>
+    <!-- =========================
+         証明書
+    ========================== -->
+
+    <section id="certificateArea" class="hidden">
+
+      <div class="certificate-scale">
+
+        <div id="certificate">
+
+          <!-- 外枠 -->
+          <div class="frame frame-outer"></div>
+          <div class="frame frame-inner"></div>
+
+
+          <!-- 四隅 -->
+          <div class="corner corner-tl"></div>
+          <div class="corner corner-tr"></div>
+          <div class="corner corner-bl"></div>
+          <div class="corner corner-br"></div>
+
+
+          <!-- 上部 -->
+          <div class="certificate-top">
+
+            <div class="office-mark">
+              CERTIFICATE OFFICE<br>
+              OF NOTHING
             </div>
 
 
-            <!-- タイトル -->
-            <div class="title-area">
+            <!-- コンパス・月桂樹 -->
+            <div class="emblem">
 
-              <div class="title-en">
-                CERTIFICATE OF NOTHING
-              </div>
+              <svg
+                viewBox="0 0 180 150"
+                xmlns="http://www.w3.org/2000/svg"
+                aria-hidden="true"
+              >
 
-              <h2>証 明 書</h2>
+                <!-- 月桂樹 左 -->
+                <path
+                  d="M58 122
+                     C42 108 31 91 29 70
+                     C27 49 34 29 48 14"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                />
 
-              <div class="title-line"></div>
+                <path
+                  d="M43 104 L28 99
+                     M37 91 L23 85
+                     M33 76 L20 71
+                     M32 60 L21 53
+                     M35 44 L26 36
+                     M40 29 L34 19"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                />
+
+
+                <!-- 月桂樹 右 -->
+                <path
+                  d="M122 122
+                     C138 108 149 91 151 70
+                     C153 49 146 29 132 14"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                />
+
+                <path
+                  d="M137 104 L152 99
+                     M143 91 L157 85
+                     M147 76 L160 71
+                     M148 60 L159 53
+                     M145 44 L154 36
+                     M140 29 L146 19"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                />
+
+
+                <!-- コンパス円 -->
+                <circle
+                  cx="90"
+                  cy="65"
+                  r="45"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1"
+                />
+
+                <circle
+                  cx="90"
+                  cy="65"
+                  r="35"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="0.7"
+                  stroke-dasharray="2 3"
+                />
+
+
+                <!-- コンパス -->
+                <path
+                  d="M90 15 L96 60 L90 65 L84 60 Z"
+                  fill="currentColor"
+                  opacity="0.9"
+                />
+
+                <path
+                  d="M90 115 L84 70 L90 65 L96 70 Z"
+                  fill="currentColor"
+                  opacity="0.45"
+                />
+
+                <path
+                  d="M40 65 L85 59 L90 65 L85 71 Z"
+                  fill="currentColor"
+                  opacity="0.55"
+                />
+
+                <path
+                  d="M140 65 L95 71 L90 65 L95 59 Z"
+                  fill="currentColor"
+                  opacity="0.9"
+                />
+
+                <circle
+                  cx="90"
+                  cy="65"
+                  r="4"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                />
+
+              </svg>
 
             </div>
 
 
-            <!-- 宛名 -->
-            <div class="recipient">
+            <div
+              class="certificate-number"
+              id="certificateNumber"
+            ></div>
 
-              <div class="recipient-label">
-                This certificate is hereby issued to
+          </div>
+
+
+          <!-- メインタイトル -->
+          <div class="title-block">
+
+            <h2>証 明 書</h2>
+
+            <div class="english-title">
+              CERTIFICATE OF NOTHING
+            </div>
+
+            <div class="ornamental-line">
+              <span></span>
+              <i></i>
+              <span></span>
+            </div>
+
+          </div>
+
+
+          <!-- 名前 -->
+          <div class="recipient">
+
+            <div
+              class="recipient-name"
+              id="certificateName"
+            ></div>
+
+          </div>
+
+
+          <!-- 本文 -->
+          <div class="body-content">
+
+            <p>
+              下記の事実について、
+            </p>
+
+            <p>
+              あなたは
+              <span id="certificateQuote"></span>
+              という事実を
+            </p>
+
+            <p>
+              証明されたことを、ここに正式に証明します。
+            </p>
+
+
+            <div class="record">
+
+              <div class="record-title">記</div>
+
+              <div
+                class="achievement"
+                id="certificateText"
+              ></div>
+
+            </div>
+
+          </div>
+
+
+          <!-- 透かし -->
+          <div class="watermark">
+
+            <svg
+              viewBox="0 0 400 400"
+              xmlns="http://www.w3.org/2000/svg"
+              aria-hidden="true"
+            >
+
+              <circle
+                cx="200"
+                cy="200"
+                r="175"
+                fill="none"
+              />
+
+              <circle
+                cx="200"
+                cy="200"
+                r="145"
+                fill="none"
+              />
+
+              <circle
+                cx="200"
+                cy="200"
+                r="115"
+                fill="none"
+              />
+
+              <path
+                d="
+                  M200 20
+                  L225 175
+                  L380 200
+                  L225 225
+                  L200 380
+                  L175 225
+                  L20 200
+                  L175 175
+                  Z
+                "
+                fill="none"
+              />
+
+              <path
+                d="
+                  M200 55
+                  C280 55 345 120 345 200
+                  C345 280 280 345 200 345
+                  C120 345 55 280 55 200
+                  C55 120 120 55 200 55
+                  Z
+                "
+                fill="none"
+              />
+
+            </svg>
+
+          </div>
+
+
+          <!-- 下部 -->
+          <div class="bottom-area">
+
+            <div
+              class="date"
+              id="certificateDate"
+            ></div>
+
+
+            <div class="issuer">
+
+              <div class="issuer-name">
+                どうでもいい証明書発行所
               </div>
 
-              <div class="recipient-name">
-                <span id="certificateName"></span>
-                <span class="honorific"> 様</span>
+              <div class="issuer-english">
+                OFFICE OF NOTHING
               </div>
 
             </div>
 
 
-            <!-- 本文 -->
-            <div class="certificate-content">
-
-              <p id="certificateText"></p>
-
-              <div class="achievement">
-                <span id="certificateTextLarge"></span>
-              </div>
-
+            <div class="seal">
+              <span>之</span>
+              <span>印</span>
             </div>
 
+          </div>
 
-            <!-- 透かし -->
-            <div class="watermark">
-              NOTHING
+
+          <!-- 最下部 -->
+          <div class="footer">
+
+            <div class="footer-line">
+              <span></span>
+              <i></i>
+              <span></span>
             </div>
 
+            <p>
+              ※ 本証明書は法的効力を有しません。
+            </p>
 
-            <!-- 下部 -->
-            <div class="certificate-bottom">
-
-              <div class="date-area">
-                <span class="small-label">DATE OF ISSUE</span>
-                <span id="certificateDate"></span>
-              </div>
-
-              <div class="issuer-area">
-                <span class="small-label">ISSUED BY</span>
-                <strong>どうでもいい証明書発行所</strong>
-                <span class="issuer-en">CERTIFICATE OFFICE OF NOTHING</span>
-              </div>
-
-              <div class="seal">
-                之<br>印
-              </div>
-
-            </div>
-
-
-            <!-- 注意書き -->
-            <div class="certificate-footer">
-              本証明書は法的・公的効力を一切有しません。
-            </div>
+            <small>
+              NO LEGAL VALIDITY
+            </small>
 
           </div>
 
@@ -175,34 +380,32 @@
       </div>
 
 
-      <!-- 操作 -->
-      <div class="actions">
+      <!-- 操作ボタン -->
+      <div class="certificate-actions">
 
-        <button id="downloadButton" class="action-button primary">
+        <button id="downloadButton">
           証明書を画像として保存
         </button>
 
-        <div class="share-buttons">
+        <button id="lineButton" class="secondary-button">
+          LINEで送る
+        </button>
 
-          <button id="lineButton" class="action-button line">
-            LINEで送る
-          </button>
-
-          <button id="xButton" class="action-button x">
-            Xで共有
-          </button>
-
-        </div>
-
-        <p class="instagram-note">
-          Instagramで共有する場合は、画像を保存して投稿してください。
-        </p>
+        <button id="xButton" class="secondary-button">
+          Xで共有
+        </button>
 
       </div>
 
     </section>
 
   </main>
+
+
+  <!-- 画像化 -->
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js">
+  </script>
 
   <script src="script.js"></script>
 
