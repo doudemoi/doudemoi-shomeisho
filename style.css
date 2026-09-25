@@ -919,23 +919,25 @@ button:disabled {
   }
 
 
-  /*
-    証明書の表示領域
+  /* -------------------------------------
+     証明書の表示領域
 
-    元サイズ:
-    760 × 1013.333
-
-    表示幅:
-    画面幅 - 24px
-  */
+     760 : 1013.333 の比率を維持
+     calc() の乗算を使わず、
+     vwだけで高さを指定
+  ------------------------------------- */
 
   .certificate-scale {
     position: relative;
 
     width: calc(100vw - 24px);
-    height: calc(
-      (100vw - 24px) * 1.333333
-    );
+
+    /*
+      (100vw - 24px) × 1013.333 / 760
+
+      = 133.333333vw - 32px
+    */
+    height: calc(133.333333vw - 32px);
 
     margin: 0 auto;
 
@@ -945,12 +947,9 @@ button:disabled {
   }
 
 
-  /*
-    証明書本体
-
-    デザインはPC版と完全に同じ。
-    表示時だけ縮小。
-  */
+  /* -------------------------------------
+     証明書本体
+  ------------------------------------- */
 
   #certificate {
     position: absolute;
@@ -963,6 +962,9 @@ button:disabled {
 
     transform-origin: top left;
 
+    /*
+      画面幅に合わせて縮小
+    */
     transform:
       scale(
         calc((100vw - 24px) / 760)
@@ -970,19 +972,16 @@ button:disabled {
   }
 
 
-  /*
-    ボタンは証明書とは別の通常レイアウト。
-    証明書の縮小領域の直後に表示する。
-  */
+  /* -------------------------------------
+     操作ボタン
+
+     証明書の表示領域の下に配置
+  ------------------------------------- */
 
   .certificate-actions {
     position: relative;
 
-    display: flex !important;
-
-    flex-direction: column;
-
-    align-items: center;
+    display: block !important;
 
     width: calc(100vw - 24px);
     max-width: 400px;
@@ -990,7 +989,6 @@ button:disabled {
     height: auto;
 
     margin: 30px auto 0;
-
     padding: 0;
 
     z-index: 100;
@@ -1001,51 +999,31 @@ button:disabled {
     overflow: visible;
   }
 
-
-  /*
-    3つのボタン
-  */
-
   .certificate-actions button {
-    position: relative;
-
     display: block !important;
+
+    position: relative;
 
     width: 100%;
     max-width: 400px;
 
     height: auto;
-
     min-height: 50px;
 
     margin: 10px auto 0;
-
     padding: 15px 20px;
+
+    flex: none;
 
     visibility: visible !important;
     opacity: 1 !important;
 
-    flex: none;
-
     overflow: visible;
   }
-
-
-  /*
-    1つ目だけ上端の余白をなくす
-  */
 
   .certificate-actions #downloadButton {
     margin-top: 0;
   }
-
-
-  /*
-    LINE
-    X
-
-    元デザインの secondary-button を維持
-  */
 
   .certificate-actions #lineButton,
   .certificate-actions #xButton {
@@ -1070,16 +1048,19 @@ button:disabled {
   }
 
 
-  /*
-    証明書
-  */
+  /* -------------------------------------
+     証明書
+  ------------------------------------- */
 
   .certificate-scale {
     width: calc(100vw - 16px);
 
-    height: calc(
-      (100vw - 16px) * 1.333333
-    );
+    /*
+      (100vw - 16px) × 1013.333 / 760
+
+      = 133.333333vw - 21.333333px
+    */
+    height: calc(133.333333vw - 21.333333px);
   }
 
   #certificate {
@@ -1090,9 +1071,9 @@ button:disabled {
   }
 
 
-  /*
-    ボタン
-  */
+  /* -------------------------------------
+     ボタン
+  ------------------------------------- */
 
   .certificate-actions {
     width: calc(100vw - 16px);
