@@ -978,3 +978,40 @@ button:disabled {
       );
   }
 }
+@media (max-width: 760px) {
+
+  /* 共有ボタンエリア */
+  .certificate-actions {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    width: 100% !important;
+    height: auto !important;
+    margin: 30px auto 0 !important;
+    position: relative !important;
+    z-index: 9999 !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+
+  /* ボタンそのもの */
+  .certificate-actions button {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    position: relative !important;
+    width: 100% !important;
+    max-width: 400px !important;
+    height: auto !important;
+    margin: 10px auto !important;
+  }
+
+  #downloadButton,
+  #lineButton,
+  #xButton {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+}
