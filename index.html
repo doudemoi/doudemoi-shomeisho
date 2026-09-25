@@ -5,42 +5,58 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>どうでもいい証明書発行所</title>
+  <meta name="description" content="あなたの人生で一枚だけ発行される、どうでもいい証明書。">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;500;600;700&family=Playfair+Display:wght@400;500&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="style.css">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;500;600;700;900&family=Playfair+Display:wght@400;500;600&display=swap"
+    rel="stylesheet"
+  >
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-  <main>
+  <main class="page">
 
-    <!-- 入力画面 -->
-    <section id="inputArea">
+    <!-- 発行前 -->
+    <section id="inputArea" class="input-area">
 
-      <h1>どうでもいい証明書発行所</h1>
+      <div class="site-mark">
+        CERTIFICATE OFFICE
+      </div>
+
+      <h1>どうでもいい<br>証明書発行所</h1>
 
       <p class="lead">
         あなたの人生で一枚だけ発行される、<br>
         どうでもいい証明書。
       </p>
 
-      <input
-        type="text"
-        id="nameInput"
-        placeholder="名前を入力してください"
-        maxlength="20"
-      >
+      <div class="input-box">
 
-      <button id="issueButton">
-        証明書を発行する
-      </button>
+        <label for="nameInput">あなたの名前</label>
 
-      <p id="status"></p>
+        <input
+          id="nameInput"
+          type="text"
+          maxlength="20"
+          placeholder="名前を入力してください"
+          autocomplete="off"
+        >
+
+        <button id="issueButton" class="main-button">
+          証明書を発行する
+        </button>
+
+        <p id="status" class="status"></p>
+
+      </div>
 
     </section>
 
@@ -48,140 +64,108 @@
     <!-- 証明書 -->
     <section id="certificateArea" style="display:none;">
 
-      <div id="certificate">
+      <div id="certificate" class="certificate">
 
-        <div class="certificate-inner">
+        <div class="certificate-border">
 
-          <!-- 上部 -->
-          <div class="certificate-header">
+          <div class="certificate-inner">
 
-            <div class="english-left">
-              CERTIFICATE OFFICE<br>
-              OF NOTHING
-            </div>
+            <!-- 上部 -->
+            <header class="certificate-header">
 
-            <div class="emblem">
-              <div class="laurel left"></div>
-
-              <div class="compass">
-                ✦
+              <div class="header-left">
+                CERTIFICATE
               </div>
 
-              <div class="laurel right"></div>
-            </div>
+              <div class="emblem">
+                <span>之</span>
+              </div>
 
+              <div class="header-right">
+                OFFICE OF<br>
+                NOTHING
+              </div>
+
+            </header>
+
+
+            <!-- 番号 -->
             <div class="certificate-number">
-              第 <span id="certificateNumber">00000000</span> 号
+              No. <span id="certificateNumber">0000000</span>
             </div>
 
-          </div>
 
+            <!-- タイトル -->
+            <div class="title-area">
 
-          <!-- タイトル -->
-          <div class="title-area">
-
-            <h2>証 明 書</h2>
-
-            <div class="title-english">
-              CERTIFICATE OF NOTHING
-            </div>
-
-            <div class="ornament">
-              <span></span>
-              <b>◆</b>
-              <span></span>
-            </div>
-
-          </div>
-
-
-          <!-- 名前 -->
-          <div class="recipient">
-
-            <div class="recipient-name">
-              <span id="certificateName">山田 太郎</span>
-              <span class="honorific">殿</span>
-            </div>
-
-            <div class="recipient-line"></div>
-
-          </div>
-
-
-          <!-- 本文 -->
-          <div class="certificate-body">
-
-            <p>
-              下記の事実について、
-            </p>
-
-            <p>
-              あなたは「<span id="certificateText">特に何もしていない</span>」という事実を
-            </p>
-
-            <p>
-              証明されたことを、ここに正式に証明します。
-            </p>
-
-          </div>
-
-
-          <!-- 記 -->
-          <div class="ki">
-            記
-          </div>
-
-
-          <!-- 内容 -->
-          <div class="achievement">
-            <span id="certificateTextLarge">
-              特に何もしていない
-            </span>
-          </div>
-
-
-          <!-- 下部 -->
-          <div class="certificate-bottom">
-
-            <div class="date">
-              <span id="certificateDate">2026 年 9 月 25 日</span>
-            </div>
-
-            <div class="issuer-area">
-
-              <div class="issuer">
-                どうでもいい証明書発行所
+              <div class="title-en">
+                CERTIFICATE OF NOTHING
               </div>
 
-              <div class="issuer-english">
-                OFFICE OF NOTHING
+              <h2>証 明 書</h2>
+
+              <div class="title-line"></div>
+
+            </div>
+
+
+            <!-- 宛名 -->
+            <div class="recipient">
+
+              <div class="recipient-label">
+                This certificate is hereby issued to
+              </div>
+
+              <div class="recipient-name">
+                <span id="certificateName"></span>
+                <span class="honorific"> 様</span>
               </div>
 
             </div>
 
-            <div class="seal">
-              <div>之</div>
-              <div>印</div>
+
+            <!-- 本文 -->
+            <div class="certificate-content">
+
+              <p id="certificateText"></p>
+
+              <div class="achievement">
+                <span id="certificateTextLarge"></span>
+              </div>
+
             </div>
 
-          </div>
 
-
-          <!-- フッター -->
-          <div class="certificate-footer">
-
-            <div class="footer-ornament">
-              <span></span>
-              <b>◆</b>
-              <span></span>
+            <!-- 透かし -->
+            <div class="watermark">
+              NOTHING
             </div>
 
-            <div class="disclaimer">
-              ※ 本証明書は法的効力を有しません。
+
+            <!-- 下部 -->
+            <div class="certificate-bottom">
+
+              <div class="date-area">
+                <span class="small-label">DATE OF ISSUE</span>
+                <span id="certificateDate"></span>
+              </div>
+
+              <div class="issuer-area">
+                <span class="small-label">ISSUED BY</span>
+                <strong>どうでもいい証明書発行所</strong>
+                <span class="issuer-en">CERTIFICATE OFFICE OF NOTHING</span>
+              </div>
+
+              <div class="seal">
+                之<br>印
+              </div>
+
             </div>
 
-            <div class="legal-english">
-              NO LEGAL VALIDITY
+
+            <!-- 注意書き -->
+            <div class="certificate-footer">
+              本証明書は法的・公的効力を一切有しません。
             </div>
 
           </div>
@@ -191,20 +175,20 @@
       </div>
 
 
-      <!-- 操作ボタン -->
+      <!-- 操作 -->
       <div class="actions">
 
-        <button id="downloadButton">
+        <button id="downloadButton" class="action-button primary">
           証明書を画像として保存
         </button>
 
         <div class="share-buttons">
 
-          <button id="lineButton" class="line-button">
+          <button id="lineButton" class="action-button line">
             LINEで送る
           </button>
 
-          <button id="xButton" class="x-button">
+          <button id="xButton" class="action-button x">
             Xで共有
           </button>
 
