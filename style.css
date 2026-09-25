@@ -1,29 +1,907 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: #e9e6dc;
+}
+
+body {
+  margin: 0;
+  color: #282722;
+
+  background:
+    radial-gradient(
+      circle at 20% 20%,
+      rgba(90, 75, 50, 0.035),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 80% 70%,
+      rgba(90, 75, 50, 0.03),
+      transparent 32%
+    ),
+    #e9e6dc;
+
+  font-family:
+    "Yu Mincho",
+    "Hiragino Mincho ProN",
+    "Hiragino Mincho Pro",
+    "Noto Serif JP",
+    serif;
+}
+
+
+/* =====================================
+   サイト全体
+===================================== */
+
+.container {
+  width: 100%;
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 55px 20px 70px;
+  text-align: center;
+}
+
+.site-header h1 {
+  margin: 0 0 12px;
+
+  font-size: 30px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+}
+
+.description {
+  margin: 0;
+
+  color: #777267;
+
+  font-size: 14px;
+  line-height: 2;
+  letter-spacing: 0.08em;
+}
+
+
+/* =====================================
+   入力欄
+===================================== */
+
+#inputArea {
+  margin-top: 36px;
+}
+
+input {
+  display: block;
+
+  width: 100%;
+  max-width: 400px;
+  height: 52px;
+
+  margin: 0 auto;
+  padding: 0 16px;
+
+  background: #fbfaf6;
+
+  border: 1px solid #aaa49a;
+  border-radius: 2px;
+
+  color: #282722;
+
+  font-family: inherit;
+  font-size: 16px;
+
+  outline: none;
+}
+
+input:focus {
+  border-color: #716b60;
+
+  box-shadow:
+    0 0 0 3px rgba(100, 90, 70, 0.07);
+}
+
+input::placeholder {
+  color: #aaa49e;
+}
+
+button {
+  display: block;
+
+  width: 100%;
+  max-width: 400px;
+
+  margin: 14px auto 0;
+  padding: 15px 20px;
+
+  background: #292823;
+
+  border: 1px solid #292823;
+  border-radius: 2px;
+
+  color: #f8f6ef;
+
+  font-family: inherit;
+  font-size: 15px;
+  letter-spacing: 0.08em;
+
+  cursor: pointer;
+
+  transition:
+    opacity 0.2s ease,
+    transform 0.1s ease;
+}
+
+button:hover {
+  opacity: 0.82;
+}
+
+button:active {
+  transform: translateY(1px);
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+#status {
+  min-height: 24px;
+  margin: 18px 0 0;
+
+  color: #777267;
+  font-size: 13px;
+}
+
+.hidden {
+  display: none !important;
+}
+
+
+/* =====================================
+   証明書エリア
+===================================== */
+
+#certificateArea {
+  width: 100%;
+  margin-top: 45px;
+}
+
+
+/*
+  証明書の表示領域
+
+  PC:
+  760 × 1013.333
+
+  スマホ:
+  画面幅に合わせて縮小
+*/
+.certificate-scale {
+  position: relative;
+
+  width: min(760px, calc(100vw - 24px));
+
+  height: auto;
+
+  margin: 0 auto;
+
+  aspect-ratio: 760 / 1013.333;
+
+  overflow: visible;
+}
+
+
+/* =====================================
+   証明書本体
+===================================== */
+
+#certificate {
+  position: absolute;
+
+  top: 0;
+  left: 0;
+
+  width: 760px;
+  height: 1013.333px;
+
+  transform-origin: top left;
+
+  overflow: hidden;
+
+  background:
+    radial-gradient(
+      ellipse at 50% 30%,
+      rgba(150, 135, 105, 0.045),
+      transparent 50%
+    ),
+    #f7f4ea;
+
+  color: #292821;
+
+  box-shadow:
+    0 16px 38px rgba(55, 49, 39, 0.16);
+}
+
+
+/* =====================================
+   紙の質感
+===================================== */
+
+#certificate::before {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  pointer-events: none;
+
+  background:
+    radial-gradient(
+      circle at 10% 15%,
+      rgba(100, 85, 60, 0.04),
+      transparent 18%
+    ),
+    radial-gradient(
+      circle at 85% 75%,
+      rgba(100, 85, 60, 0.035),
+      transparent 22%
+    );
+
+  opacity: 0.7;
+
+  z-index: 0;
+}
+
+
+/* =====================================
+   枠
+===================================== */
+
+.frame {
+  position: absolute;
+
+  pointer-events: none;
+
+  z-index: 10;
+}
+
+.frame-outer {
+  inset: 20px;
+
+  border: 1.4px solid #615b4f;
+}
+
+.frame-inner {
+  inset: 28px;
+
+  border: 0.8px solid #8c8473;
+}
+
+
+/* =====================================
+   四隅の装飾
+===================================== */
+
+.corner {
+  position: absolute;
+
+  width: 62px;
+  height: 62px;
+
+  z-index: 11;
+
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      45deg,
+      transparent 46%,
+      #6d6658 47%,
+      #6d6658 50%,
+      transparent 51%
+    );
+}
+
+.corner::before,
+.corner::after {
+  content: "";
+
+  position: absolute;
+
+  background: #625b4e;
+}
+
+.corner::before {
+  width: 48px;
+  height: 1px;
+}
+
+.corner::after {
+  width: 1px;
+  height: 48px;
+}
+
+.corner-tl {
+  top: 20px;
+  left: 20px;
+}
+
+.corner-tl::before {
+  top: 14px;
+  left: 0;
+}
+
+.corner-tl::after {
+  top: 0;
+  left: 14px;
+}
+
+.corner-tr {
+  top: 20px;
+  right: 20px;
+}
+
+.corner-tr::before {
+  top: 14px;
+  right: 0;
+}
+
+.corner-tr::after {
+  top: 0;
+  right: 14px;
+}
+
+.corner-bl {
+  bottom: 20px;
+  left: 20px;
+}
+
+.corner-bl::before {
+  bottom: 14px;
+  left: 0;
+}
+
+.corner-bl::after {
+  bottom: 0;
+  left: 14px;
+}
+
+.corner-br {
+  bottom: 20px;
+  right: 20px;
+}
+
+.corner-br::before {
+  bottom: 14px;
+  right: 0;
+}
+
+.corner-br::after {
+  bottom: 0;
+  right: 14px;
+}
+
+
+/* =====================================
+   上部
+===================================== */
+
+.certificate-top {
+  position: absolute;
+
+  top: 62px;
+  left: 75px;
+  right: 75px;
+
+  height: 145px;
+
+  z-index: 5;
+}
+
+.office-mark {
+  position: absolute;
+
+  top: 20px;
+  left: 0;
+
+  color: #39362f;
+
+  font-family:
+    "Times New Roman",
+    serif;
+
+  font-size: 14px;
+  line-height: 1.8;
+
+  letter-spacing: 0.22em;
+  text-align: left;
+}
+
+.certificate-number {
+  position: absolute;
+
+  top: 22px;
+  right: 0;
+
+  color: #34322d;
+
+  font-family:
+    "Times New Roman",
+    "Yu Mincho",
+    serif;
+
+  font-size: 14px;
+  letter-spacing: 0.1em;
+}
+
+
+/* =====================================
+   紋章
+===================================== */
+
+.emblem {
+  position: absolute;
+
+  top: 0;
+  left: 50%;
+
+  width: 180px;
+  height: 150px;
+
+  transform: translateX(-50%);
+
+  color: #5c574c;
+}
+
+.emblem svg {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+}
+
+
+/* =====================================
+   タイトル
+===================================== */
+
+.title-block {
+  position: absolute;
+
+  top: 225px;
+  left: 70px;
+  right: 70px;
+
+  z-index: 5;
+
+  text-align: center;
+}
+
+.title-block h2 {
+  margin: 0;
+
+  color: #24231f;
+
+  font-family:
+    "Yu Mincho",
+    "Hiragino Mincho ProN",
+    serif;
+
+  font-size: 67px;
+  font-weight: 500;
+
+  line-height: 1.1;
+
+  letter-spacing: 0.34em;
+  text-indent: 0.34em;
+}
+
+.english-title {
+  margin-top: 18px;
+
+  color: #454139;
+
+  font-family:
+    "Times New Roman",
+    serif;
+
+  font-size: 15px;
+
+  letter-spacing: 0.46em;
+  text-indent: 0.46em;
+}
+
+
+/* =====================================
+   タイトル飾り
+===================================== */
+
+.ornamental-line {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 12px;
+
+  margin-top: 25px;
+}
+
+.ornamental-line span {
+  width: 230px;
+  height: 1px;
+
+  background: #aaa18f;
+}
+
+.ornamental-line i {
+  width: 12px;
+  height: 12px;
+
+  border: 1px solid #746c5d;
+
+  background: #f7f4ea;
+
+  transform: rotate(45deg);
+}
+
+
+/* =====================================
+   名前
+===================================== */
+
+.recipient {
+  position: absolute;
+
+  top: 405px;
+
+  left: 155px;
+  right: 155px;
+
+  z-index: 5;
+
+  text-align: center;
+}
+
+.recipient-name {
+  padding-bottom: 11px;
+
+  border-bottom: 1px solid #5e594f;
+
+  color: #25241f;
+
+  font-size: 31px;
+  font-weight: 500;
+
+  letter-spacing: 0.18em;
+
+  white-space: nowrap;
+}
+
+
+/* =====================================
+   本文
+===================================== */
+
+.body-content {
+  position: absolute;
+
+  top: 485px;
+
+  left: 105px;
+  right: 105px;
+
+  z-index: 5;
+
+  color: #36332c;
+
+  font-size: 18px;
+
+  line-height: 2.15;
+
+  letter-spacing: 0.08em;
+
+  text-align: center;
+}
+
+.body-content p {
+  margin: 0;
+}
+
+.record {
+  margin-top: 35px;
+}
+
+.record-title {
+  margin-bottom: 17px;
+
+  font-size: 20px;
+
+  letter-spacing: 0.2em;
+}
+
+.achievement {
+  font-size: 28px;
+
+  font-weight: 500;
+
+  line-height: 1.65;
+
+  letter-spacing: 0.12em;
+}
+
+
+/* =====================================
+   透かし
+===================================== */
+
+.watermark {
+  position: absolute;
+
+  top: 515px;
+  left: 180px;
+
+  width: 400px;
+  height: 400px;
+
+  z-index: 1;
+
+  color: #9c927e;
+
+  opacity: 0.11;
+
+  pointer-events: none;
+}
+
+.watermark svg {
+  width: 100%;
+  height: 100%;
+
+  fill: none;
+
+  stroke: currentColor;
+
+  stroke-width: 1;
+}
+
+
+/* =====================================
+   下部
+===================================== */
+
+.bottom-area {
+  position: absolute;
+
+  left: 75px;
+  right: 75px;
+  bottom: 150px;
+
+  height: 105px;
+
+  z-index: 5;
+}
+
+.date {
+  position: absolute;
+
+  left: 0;
+  bottom: 12px;
+
+  color: #3c3932;
+
+  font-family:
+    "Times New Roman",
+    "Yu Mincho",
+    serif;
+
+  font-size: 17px;
+
+  letter-spacing: 0.15em;
+}
+
+.issuer {
+  position: absolute;
+
+  right: 75px;
+  bottom: 8px;
+
+  text-align: right;
+}
+
+.issuer-name {
+  color: #39362f;
+
+  font-size: 16px;
+
+  letter-spacing: 0.1em;
+}
+
+.issuer-english {
+  margin-top: 7px;
+
+  color: #4d4940;
+
+  font-family:
+    "Times New Roman",
+    serif;
+
+  font-size: 10px;
+
+  letter-spacing: 0.3em;
+}
+
+
+/* =====================================
+   印章
+===================================== */
+
+.seal {
+  position: absolute;
+
+  right: 0;
+  bottom: 0;
+
+  width: 66px;
+  height: 76px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 4px;
+
+  padding: 5px;
+
+  color: #a52c25;
+
+  border: 3px solid #a52c25;
+  border-radius: 5px;
+
+  font-family:
+    "Yu Mincho",
+    "Hiragino Mincho ProN",
+    serif;
+
+  font-size: 19px;
+  font-weight: 600;
+
+  writing-mode: vertical-rl;
+
+  transform: rotate(1deg);
+
+  background: rgba(165, 44, 37, 0.025);
+}
+
+.seal::before {
+  content: "";
+
+  position: absolute;
+  inset: 4px;
+
+  border: 1px solid #a52c25;
+  border-radius: 2px;
+}
+
+
+/* =====================================
+   フッター
+===================================== */
+
+.footer {
+  position: absolute;
+
+  left: 100px;
+  right: 100px;
+  bottom: 62px;
+
+  z-index: 5;
+
+  text-align: center;
+}
+
+.footer-line {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 14px;
+
+  margin-bottom: 19px;
+}
+
+.footer-line span {
+  width: 195px;
+  height: 1px;
+
+  background: #9b9282;
+}
+
+.footer-line i {
+  width: 10px;
+  height: 10px;
+
+  border: 1px solid #746c5d;
+
+  transform: rotate(45deg);
+}
+
+.footer p {
+  margin: 0;
+
+  color: #49453d;
+
+  font-size: 11px;
+
+  letter-spacing: 0.1em;
+}
+
+.footer small {
+  display: block;
+
+  margin-top: 8px;
+
+  color: #686258;
+
+  font-family:
+    "Times New Roman",
+    serif;
+
+  font-size: 8px;
+
+  letter-spacing: 0.35em;
+}
+
+
 /* =====================================
    操作ボタン
 ===================================== */
 
 .certificate-actions {
+  display: block;
+
   width: 100%;
   max-width: 400px;
+
   margin: 28px auto 0;
+
+  position: relative;
+  z-index: 20;
+
+  visibility: visible;
+  opacity: 1;
 }
 
 .certificate-actions button {
+  display: block;
+
   width: 100%;
   max-width: 400px;
+
   margin: 10px auto 0;
+}
+
+#downloadButton,
+#lineButton,
+#xButton {
+  visibility: visible;
+  opacity: 1;
 }
 
 .secondary-button {
   background: transparent;
+
   color: #292823;
+
   border-color: #777166;
 }
 
 
 /* =====================================
    スマホ
-   証明書そのものを丸ごと縮小
+   証明書を画面幅に合わせて縮小
 ===================================== */
 
 @media (max-width: 760px) {
@@ -40,67 +918,142 @@
     font-size: 13px;
   }
 
-  /*
-    証明書を画面幅に合わせる
-  */
-  .certificate-scale {
-    width: calc(100vw - 24px);
 
+  /*
+    証明書の表示領域
+
+    元サイズ:
+    760 × 1013.333
+
+    表示幅:
+    画面幅 - 24px
+  */
+
+  .certificate-scale {
+    position: relative;
+
+    width: calc(100vw - 24px);
     height: calc(
       (100vw - 24px) * 1.333333
     );
 
-    aspect-ratio: auto;
     margin: 0 auto;
+
+    aspect-ratio: auto;
+
     overflow: visible;
   }
 
+
   /*
-    760 × 1013.333 の証明書を縮小
+    証明書本体
+
+    デザインはPC版と完全に同じ。
+    表示時だけ縮小。
   */
+
   #certificate {
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
     width: 760px;
     height: 1013.333px;
 
     transform-origin: top left;
 
-    transform: scale(
-      calc((100vw - 24px) / 760)
-    );
+    transform:
+      scale(
+        calc((100vw - 24px) / 760)
+      );
   }
 
+
   /*
-    ボタン
+    ボタンは証明書とは別の通常レイアウト。
+    証明書の縮小領域の直後に表示する。
   */
+
   .certificate-actions {
+    position: relative;
+
+    display: flex !important;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    width: calc(100vw - 24px);
+    max-width: 400px;
+
+    height: auto;
+
+    margin: 30px auto 0;
+
+    padding: 0;
+
+    z-index: 100;
+
+    visibility: visible !important;
+    opacity: 1 !important;
+
+    overflow: visible;
+  }
+
+
+  /*
+    3つのボタン
+  */
+
+  .certificate-actions button {
+    position: relative;
+
+    display: block !important;
+
     width: 100%;
     max-width: 400px;
-    margin: 28px auto 0;
 
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
+    height: auto;
+
+    min-height: 50px;
+
+    margin: 10px auto 0;
+
+    padding: 15px 20px;
+
+    visibility: visible !important;
+    opacity: 1 !important;
+
+    flex: none;
+
+    overflow: visible;
   }
 
-  /*
-    保存ボタンだけ1段全部使う
-  */
-  #downloadButton {
-    grid-column: 1 / -1;
 
-    width: 100%;
-    max-width: none;
-    margin: 0;
+  /*
+    1つ目だけ上端の余白をなくす
+  */
+
+  .certificate-actions #downloadButton {
+    margin-top: 0;
   }
 
+
   /*
-    LINE・X
+    LINE
+    X
+
+    元デザインの secondary-button を維持
   */
-  #lineButton,
-  #xButton {
-    width: 100%;
-    max-width: none;
-    margin: 0;
+
+  .certificate-actions #lineButton,
+  .certificate-actions #xButton {
+    background: transparent;
+
+    color: #292823;
+
+    border: 1px solid #777166;
   }
 }
 
@@ -116,6 +1069,11 @@
     padding-right: 8px;
   }
 
+
+  /*
+    証明書
+  */
+
   .certificate-scale {
     width: calc(100vw - 16px);
 
@@ -125,20 +1083,34 @@
   }
 
   #certificate {
-    transform: scale(
-      calc((100vw - 16px) / 760)
-    );
+    transform:
+      scale(
+        calc((100vw - 16px) / 760)
+      );
   }
+
+
+  /*
+    ボタン
+  */
 
   .certificate-actions {
-    max-width: none;
-    gap: 8px;
+    width: calc(100vw - 16px);
+
+    max-width: 400px;
+
+    margin-top: 30px;
   }
 
-  #lineButton,
-  #xButton {
-    font-size: 13px;
-    padding-left: 6px;
-    padding-right: 6px;
+  .certificate-actions button {
+    width: 100%;
+
+    max-width: 400px;
+
+    min-height: 48px;
+
+    padding: 14px 12px;
+
+    font-size: 14px;
   }
 }
