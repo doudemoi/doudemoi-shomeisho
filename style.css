@@ -168,25 +168,20 @@ button:disabled {
 }
 
 
-/*
-  証明書の表示領域
+/* =====================================
+   証明書表示領域
 
-  PC:
-  760 × 1013.333
+   ここを今回抜本的に変更
+===================================== */
 
-  スマホ:
-  画面幅に合わせて縮小
-*/
 .certificate-scale {
-  position: relative;
-
-  width: min(760px, calc(100vw - 24px));
-
-  height: auto;
+  width: 760px;
 
   margin: 0 auto;
 
-  aspect-ratio: 760 / 1013.333;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
 
   overflow: visible;
 }
@@ -197,15 +192,12 @@ button:disabled {
 ===================================== */
 
 #certificate {
-  position: absolute;
+  position: relative;
 
-  top: 0;
-  left: 0;
+  flex: 0 0 auto;
 
   width: 760px;
   height: 1013.333px;
-
-  transform-origin: top left;
 
   overflow: hidden;
 
@@ -860,6 +852,8 @@ button:disabled {
 ===================================== */
 
 .certificate-actions {
+  position: relative;
+
   display: block;
 
   width: 100%;
@@ -867,7 +861,6 @@ button:disabled {
 
   margin: 28px auto 0;
 
-  position: relative;
   z-index: 20;
 
   visibility: visible;
@@ -901,7 +894,8 @@ button:disabled {
 
 /* =====================================
    スマホ
-   証明書を画面幅に合わせて縮小
+   ★ transform: scale() を廃止
+   ★ zoom でレイアウトごと縮小
 ===================================== */
 
 @media (max-width: 760px) {
@@ -921,104 +915,85 @@ button:disabled {
 
   /* -------------------------------------
      証明書の表示領域
-
-     760 : 1013.333 の比率を維持
-     calc() の乗算を使わず、
-     vwだけで高さを指定
   ------------------------------------- */
 
   .certificate-scale {
-    position: relative;
-
-    width: calc(100vw - 24px);
-
-    /*
-      (100vw - 24px) × 1013.333 / 760
-
-      = 133.333333vw - 32px
-    */
-    height: calc(133.333333vw - 32px);
+    width: 100%;
 
     margin: 0 auto;
 
-    aspect-ratio: auto;
+    display: flex;
+
+    justify-content: center;
+
+    align-items: flex-start;
 
     overflow: visible;
   }
 
 
   /* -------------------------------------
-     証明書本体
+     証明書
+     
+     760pxのデザインを
+     画面幅に合わせて zoom。
+
+     transformではないので、
+     レイアウト上の高さも一緒に縮む。
   ------------------------------------- */
 
   #certificate {
-    position: absolute;
-
-    top: 0;
-    left: 0;
+    position: relative;
 
     width: 760px;
     height: 1013.333px;
 
-    transform-origin: top left;
+    flex: 0 0 auto;
 
-    /*
-      画面幅に合わせて縮小
-    */
-    transform:
-      scale(
-        calc((100vw - 24px) / 760)
-      );
+    zoom: calc(
+      (100vw - 24px) / 760px
+    );
+
+    transform: none;
   }
 
 
   /* -------------------------------------
      操作ボタン
-
-     証明書の表示領域の下に配置
+     
+     証明書がレイアウト上でも
+     縮小されているため、
+     普通にその下へ配置できる。
   ------------------------------------- */
 
   .certificate-actions {
-    position: relative;
-
-    display: block !important;
+    display: block;
 
     width: calc(100vw - 24px);
+
     max-width: 400px;
 
-    height: auto;
-
     margin: 30px auto 0;
-    padding: 0;
 
-    z-index: 100;
+    position: relative;
 
-    visibility: visible !important;
-    opacity: 1 !important;
+    z-index: 20;
 
-    overflow: visible;
+    visibility: visible;
+
+    opacity: 1;
   }
 
   .certificate-actions button {
-    display: block !important;
-
-    position: relative;
+    display: block;
 
     width: 100%;
+
     max-width: 400px;
 
-    height: auto;
-    min-height: 50px;
-
     margin: 10px auto 0;
-    padding: 15px 20px;
 
-    flex: none;
-
-    visibility: visible !important;
-    opacity: 1 !important;
-
-    overflow: visible;
+    min-height: 50px;
   }
 
   .certificate-actions #downloadButton {
@@ -1047,33 +1022,15 @@ button:disabled {
     padding-right: 8px;
   }
 
-
-  /* -------------------------------------
-     証明書
-  ------------------------------------- */
-
   .certificate-scale {
-    width: calc(100vw - 16px);
-
-    /*
-      (100vw - 16px) × 1013.333 / 760
-
-      = 133.333333vw - 21.333333px
-    */
-    height: calc(133.333333vw - 21.333333px);
+    width: 100%;
   }
 
   #certificate {
-    transform:
-      scale(
-        calc((100vw - 16px) / 760)
-      );
+    zoom: calc(
+      (100vw - 16px) / 760px
+    );
   }
-
-
-  /* -------------------------------------
-     ボタン
-  ------------------------------------- */
 
   .certificate-actions {
     width: calc(100vw - 16px);
